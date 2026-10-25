@@ -18,6 +18,7 @@ public class TransactionController {
     @PostMapping("saveTransactions")
     public ResponseEntity<String> pushTransaction(@RequestBody TransactionModel transactionModel) {
         String message = transactionservice.saveTransactionData(transactionModel);
+        System.out.println(message);
         return ResponseEntity.ok(message);
     }
 
