@@ -28,7 +28,7 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                bat 'docker run -d --name training-platform -p 8080:9090 training-platform:latest'
+                bat 'docker run -d --name training-platform -p 9091:9090 training-platform:latest'
             }
         }
     }
