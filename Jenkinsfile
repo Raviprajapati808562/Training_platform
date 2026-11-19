@@ -28,7 +28,8 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-bat 'docker run -d --name training-platform -p 9091:9090 -e SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/testmyql training-platform:latest'            }
+                bat 'docker run -d --name training-platform -p 9091:9090 -e SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/testmyql training-platform:latest'
+                  }
         }
     }
 

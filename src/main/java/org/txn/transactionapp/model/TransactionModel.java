@@ -1,18 +1,25 @@
 package org.txn.transactionapp.model;
 
+import io.github.jpaadmin.annotations.AdminField;
+import io.github.jpaadmin.annotations.AdminResource;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "transaction_table")
+@AdminResource(group = "Transactions",
+        displayName = "Transaction",
+        exportable = true)
 public class TransactionModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-   private String  reference_number;
-   private String account_number;
-   private String amount;
-   private String direction;
-   private String status;
+    private String reference_number;
+    private String account_number;
+    private String amount;
+    @AdminField(searchable = true,sortable = true,filterable = true)
+    private String direction;
+    @AdminField(searchable = true,sortable = true,filterable = true)
+    private String status;
 
     public Long getId() {
         return id;

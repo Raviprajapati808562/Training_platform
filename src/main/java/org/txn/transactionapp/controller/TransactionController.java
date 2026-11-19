@@ -1,5 +1,6 @@
 package org.txn.transactionapp.controller;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,8 @@ import java.util.List;
 public class TransactionController {
     @Autowired
     private Transactionservice transactionservice;
-
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
     @PostMapping("saveTransactions")
     public ResponseEntity<String> pushTransaction(@RequestBody TransactionModel transactionModel) {
         String message = transactionservice.saveTransactionData(transactionModel);
@@ -28,5 +30,17 @@ public class TransactionController {
         List<TransactionModel> transactions  = transactionservice.getTransactionData();
         return ResponseEntity.accepted().body(transactions);
     }
+    @GetMapping("/checkJpaAdminEntity")
+    public String checkJpaAdminEntity() {
 
+        try {
+            entityManagerFactory.getMetamodel()
+                    .entity(TransactionModel.class);
+
+            return "TransactionModel is managed by this EntityManagerFactory";
+
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 }
